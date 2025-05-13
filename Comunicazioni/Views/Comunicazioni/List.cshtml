@@ -1,0 +1,262 @@
+﻿@*intermediate view model that has two objects that inherit from Comunicazione and AddComunicazioneViewModel as properties*@
+@model Comunicazioni.Models.ListAndAddViewModel
+
+<div class="container">
+	<h1>Comunicazioni</h1>
+	<div class="row gx-5">
+		<div class="col-10 col-md-9">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Mittente</th>
+						<th>Destinatario</th>
+						<th>Comunicazione</th>
+					</tr>
+				</thead>
+				<tbody>
+					@{
+						var ruolo = Context.Session.GetString("r");
+					}
+					@*Do this for every group of communications*@
+					@foreach (var gruppo in Model.Comunicazioni.OrderByDescending(g => g.Max(c => c.DataOraComunicazione)))
+					{
+						<tr>
+							@*Sender informations*@
+							<td>
+								@{
+									var primaComunicazione = gruppo.OrderBy(c => c.DataOraComunicazione).FirstOrDefault();
+									if (primaComunicazione != null)
+									{
+										if (primaComunicazione.MittenteStudente != null)
+										{
+											if (ruolo != "a")
+											{
+
+												if (primaComunicazione.MittenteStudente.K_Studente != primaComunicazione.K_Soggetto)
+												{
+													<span class="text-primary">@($"{primaComunicazione.MittenteStudente.Nome} {primaComunicazione.MittenteStudente.Cognome}")</span>
+												}
+												else
+												{
+													<span class="text-primary">Me</span>
+												}
+											}
+											else
+											{
+												<span class="text-primary">@($"{primaComunicazione.MittenteStudente.Nome} {primaComunicazione.MittenteStudente.Cognome}")</span>
+											}
+
+										}
+										else if (primaComunicazione.MittenteDocente != null)
+										{
+											if (ruolo != "a")
+											{
+												if (primaComunicazione.MittenteDocente.K_Docente != primaComunicazione.K_Soggetto)
+												{
+													<span class="text-primary">@($"{primaComunicazione.MittenteDocente.Nome} {primaComunicazione.MittenteDocente.Cognome}")</span>
+												}
+												else
+												{
+													<span class="text-primary">Me</span>
+												}
+											}
+											else
+											{
+												<span class="text-primary">@($"{primaComunicazione.MittenteDocente.Nome} {primaComunicazione.MittenteDocente.Cognome}")</span>
+											}
+										}
+										else
+										{
+											<span class="text-primary">Amministrazione</span>
+										}
+									}
+								}
+							</td>
+							<td>
+								@*Recipient information*@
+								@{
+									if (primaComunicazione != null)
+									{
+										if (primaComunicazione.DestinatarioStudente != null)
+										{
+											<span class="text-danger">@($"{primaComunicazione.DestinatarioStudente.Nome} {primaComunicazione.DestinatarioStudente.Cognome}")</span>
+										}
+										else if (primaComunicazione.DestinatarioDocente != null)
+										{
+											<span class="text-danger">@($"{primaComunicazione.DestinatarioDocente.Nome} {primaComunicazione.DestinatarioDocente.Cognome}")</span>
+										}
+										else
+										{
+											<span class="text-danger">Amministrazione</span>
+										}
+									}
+								}
+							</td>
+							<td>
+								<div class="accordion" id="accordion_@gruppo.Key">
+									<div class="accordion-item">
+										<h2 class="accordion-header">
+											<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_@gruppo.Key" aria-expanded="true" aria-controls="collapse_@gruppo.Key">
+												@gruppo.Max(c => c.DataOraComunicazione).ToString("dd/MM/yyyy HH:mm")
+											</button>
+										</h2>
+										<div id="collapse_@gruppo.Key" class="accordion-collapse collapse show" data-bs-parent="#accordion_@gruppo.Key">
+											<div class="accordion-body">
+												<ul class="list-unstyled">
+													@* For every communication present in the group (created by the group by in the selcetion query in the controller) *@
+													@foreach (var comunicazione in gruppo.OrderBy(c => c.DataOraComunicazione))
+													{
+														<li class="d-flex justify-content-between mb-4">
+															<div class="card w-100">
+																<div class="card-header d-flex justify-content-between p-3">
+																	<div class="d-flex justify-content-between align-items-baseline">
+																		<p class="fw-bold mb-0">
+																			@{
+																				if (comunicazione != null)
+																				{
+																					if (comunicazione.MittenteStudente != null)
+																					{
+																						<span class="text-primary">@($"{comunicazione.MittenteStudente.Nome} {comunicazione.MittenteStudente.Cognome}")</span>
+																					}
+																					else if (comunicazione.MittenteDocente != null)
+																					{
+																						<span class="text-danger">@($"{comunicazione.MittenteDocente.Nome} {comunicazione.MittenteDocente.Cognome}")</span>
+																					}
+																					else
+																					{
+																						<span class="text-success">Amministrazione</span>
+																					}
+																				}
+																			}
+																		</p>
+																		&nbsp;
+																		<p class="text-muted small mb-0"><i class="far fa-clock"></i> @comunicazione.DataOraComunicazione.ToString("dd/MM/yyyy HH:mm")</p>
+																	</div>
+																</div>
+																<div class="card-body">
+																	<p class="mb-0">@comunicazione.Testo</p>
+																</div>
+															</div>
+														</li>
+													}
+													<li class="bg-white">
+														@*The user can respond to a prevoius comunication. The answer will we add in the group by selection after it has been written*@
+														<form method="post" asp-action="AddRisposta">
+															<input type="hidden" name="Codice_Comunicazione" value="@gruppo.Key" />
+															<div class="form-outline">
+																<textarea class="form-control bg-body-tertiary" id="textArea_@gruppo.Key" rows="4" name="Testo" required></textarea>
+																<label class="form-label" for="textArea_@gruppo.Key">Messaggio</label>
+																<button type="submit" class="btn btn-info btn-rounded float-end mt-2">Invia</button>
+															</div>
+														</form>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+
+		</div>
+
+		<div class="col-2 col-md-3">
+			<div class="position-fixed">
+				<div class="shadow p-3 bg-body-tertiary rounded d-none d-md-block mt-4 me-5">
+					<p>Nella pagina corrente, l'utente può leggere e rispondere alle sue comunicazioni.</p>
+				</div>
+				<div>
+					<div class="d-block d-md-none mt-4">
+						<!-- Button trigger modal info -->
+						<button type="button" class="btn text-muted" data-bs-toggle="modal" data-bs-target="#staticBackdropInfo">
+							Info
+						</button>
+					</div>
+					<div class="mt-4">
+						<!-- Button trigger new comunication modal to create a new communication-->
+						<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdropAdd">
+							Nuova comunicazione
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Modal Info -->
+		<div class="modal fade " id="staticBackdropInfo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="staticBackdropLabel">informazioni d'uso</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<p>Nella pagina corrente, l'utente può leggere e rispondere alle sue comunicazioni.</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Modal Add -->
+		<div class="modal fade " id="staticBackdropAdd" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="staticBackdropLabel">Nuova Comunicazione</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<form method="post" asp-action="Add" id="form-insert">
+							@* selection of the communication recipient *@
+							@*the user can select the recipient of the communication depending of its role *@
+							@if (ruolo == "d" || ruolo == "a")
+							{
+								<div class="mt-3">
+									<label class="form-label">Studenti</label>
+									<select asp-for="AddComunicazione.K_Studente" asp-items="@ViewBag.StudentiList" class="form-select" required>
+										<option selected disabled>-- Seleziona un destinatario --</option>
+										@if (Context.Session.GetString("r") == "d")
+										{
+											<option value="">Amministrazione</option>
+										}
+									</select>
+									<span asp-validation-for="AddComunicazione.K_Studente" class="text-danger"></span>
+								</div>
+							}
+							@if (ruolo == "s" || ruolo == "a")
+							{
+								<div class="mt-3">
+									<label class="form-label">Docenti</label>
+									<select asp-for="AddComunicazione.K_Docente" asp-items="@ViewBag.DocentiList" class="form-select" required>
+										<option selected disabled>-- Seleziona un destinatario --</option>
+										@if (ruolo == "s")
+										{
+											<option value="">Amministrazione</option>
+										}
+									</select>
+									<span asp-validation-for="AddComunicazione.K_Docente" class="text-danger"></span>
+								</div>
+							}
+							@*the user can write the text of the communication and submit it *@
+							<div class="mt-4">
+								<label class="form-label">Testo:</label>
+								<textarea asp-for="AddComunicazione.Testo" class="form-control" rows="6" required id="testoComunicazioneAdd"></textarea>
+								<span asp-validation-for="AddComunicazione.Testo" class="text-danger"></span>
+							</div>
+							<button type="submit" class="btn btn-primary mt-3">Inserisci Comunicazione</button>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
