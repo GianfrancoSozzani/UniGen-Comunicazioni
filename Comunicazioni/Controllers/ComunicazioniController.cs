@@ -165,13 +165,12 @@ namespace Comunicazioni.Controllers
             PopolaDocenti();
 
             var viewModel = new Comunicazioni.Models.ListAndAddViewModel();
+            var chiave = Guid.Parse(HttpContext.Session.GetString("cod"));
 
             if (ruolo == "s")
             {
-                var studente_chiave = Guid.Parse(HttpContext.Session.GetString("cod"));
-
                 gruppo_comunicazioni = await dbContext.Comunicazioni
-                    .Where(c => c.K_Studente == studente_chiave || c.K_Soggetto == studente_chiave)
+                    .Where(c => c.K_Studente == chiave || c.K_Soggetto == chiave)
                     .OrderBy(c => c.DataOraComunicazione)
                     .GroupBy(c => c.Codice_Comunicazione)
                     .ToListAsync();
@@ -185,10 +184,8 @@ namespace Comunicazioni.Controllers
             //Logica simile per il ruolo "Docente" e "Amministrazione"
             else if (ruolo == "d")
             {
-                var docente_chiave = Guid.Parse(HttpContext.Session.GetString("cod"));
-
                 gruppo_comunicazioni = await dbContext.Comunicazioni
-                    .Where(c => c.K_Docente == docente_chiave || c.K_Soggetto == docente_chiave)
+                    .Where(c => c.K_Docente == chiave || c.K_Soggetto == chiave)
                     .OrderBy(c => c.DataOraComunicazione)
                     .GroupBy(c => c.Codice_Comunicazione)
                     .ToListAsync();
@@ -254,7 +251,7 @@ namespace Comunicazioni.Controllers
             }
             else if (ruolo == "d")
             {
-                // Il docente potrebbe inviare a uno studente specifico
+                // Il docente potrebbe inviare a uno studente specifico o all'amministrazione
                 if (comunicazione.K_Studente.HasValue && comunicazione.Studente?.Email != null)
                 {
                     destinatariEmail.Add(comunicazione.Studente.Email);
@@ -266,7 +263,7 @@ namespace Comunicazioni.Controllers
             }
             else if (ruolo == "s")
             {
-                // Lo studente potrebbe inviare a un docente specifico
+                // Lo studente potrebbe inviare a un docente specifico o all'amministrazione
                 if (comunicazione.K_Docente.HasValue && comunicazione.Docente?.Email != null)
                 {
                     destinatariEmail.Add(comunicazione.Docente.Email);
@@ -378,12 +375,12 @@ hai ricevuto una comunicazione dall'Amministrazione.
                 DataOraComunicazione = DateTime.Now,
                 Testo = viewModel.Testo.Trim(),
                 K_Studente = viewModel.K_Studente,
-                K_Docente = viewModel.K_Docente
+                K_Docente = viewModel.K_Docente,
+                K_Soggetto = Guid.Parse(HttpContext.Session.GetString("cod"))
             };
 
             if (ruolo == "a")
             {
-                comunicazione.K_Soggetto = Guid.Parse(HttpContext.Session.GetString("cod"));
                 comunicazione.Soggetto = "A";
                 //aggiunta necessaria: di default Guid? = 00000000-0000-0000-0000-0000-0000-0000, quindi non risultava null,
                 // e il meccanismo di list si inceppava
@@ -399,7 +396,6 @@ hai ricevuto una comunicazione dall'Amministrazione.
             }
             else if (ruolo == "d")
             {
-                comunicazione.K_Soggetto = Guid.Parse(HttpContext.Session.GetString("cod"));
                 comunicazione.K_Docente = null;
                 comunicazione.Soggetto = "D";
                 if (viewModel.K_Studente == null || viewModel.K_Studente == Guid.Empty)  // Se "Amministrazione"
@@ -409,7 +405,6 @@ hai ricevuto una comunicazione dall'Amministrazione.
             }
             else if (ruolo == "s")
             {
-                comunicazione.K_Soggetto = Guid.Parse(HttpContext.Session.GetString("cod"));
                 comunicazione.K_Studente = null;
                 comunicazione.Soggetto = "S";
                 if (viewModel.K_Docente == null || viewModel.K_Docente == Guid.Empty)  // Se "Amministrazione"
@@ -437,18 +432,7 @@ hai ricevuto una comunicazione dall'Amministrazione.
             string ruolo = HttpContext.Session.GetString("r");
             Guid chiaveUtente;
 
-            if (ruolo == "s")
-            {
-                chiaveUtente = Guid.Parse(HttpContext.Session.GetString("cod"));
-            }
-            else if (ruolo == "d")
-            {
-                chiaveUtente = Guid.Parse(HttpContext.Session.GetString("cod"));
-            }
-            else
-            {
-                chiaveUtente = Guid.Parse(HttpContext.Session.GetString("cod"));
-            }
+            chiaveUtente = Guid.Parse(HttpContext.Session.GetString("cod"));
 
             var ultimaComunicazione = dbContext.Comunicazioni
                 .Where(c => c.Codice_Comunicazione == viewModel.Codice_Comunicazione)
