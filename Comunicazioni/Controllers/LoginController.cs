@@ -34,13 +34,13 @@ namespace Comunicazioni.Controllers
             // Controllo login Studente
             var studente = await dbContext.Studenti
                 .Where(s => s.Email == viewModel.username && s.PWD == viewModel.PWD)
-                .Select(s => new { s.K_Studente, s.Email, s.Matricola }) // Carico solo K_Studente ed Email e Matricola
+                .Select(s => new { s.K_Studente, s.Email, s.Matricola, s.Abilitato }) // Carico solo K_Studente ed Email e Matricola
                 .FirstOrDefaultAsync();
 
 
-            if (studente != null && studente.Matricola == null)
+            if (studente != null && studente.Matricola != null && studente.Abilitato == "S")
             {
-                return Redirect("https://localhost:7098/Home/Index?cod=" + studente.K_Studente.ToString() + "&&usr=" + studente.Email + "&&r=s");
+                return RedirectToAction("List", "Comunicazioni", new { cod = studente.K_Studente, usr = studente.Email, r = "s", mat = studente.Matricola, a = studente.Abilitato });
             }
 
 
@@ -52,22 +52,22 @@ namespace Comunicazioni.Controllers
 
             if (docente != null && docente.Abilitato != "N")
             {
-                return Redirect("https://localhost:7098/Home/Index?cod=" + docente.K_Docente.ToString() + "&&usr=" + docente.Email + "&&r=d");
+                return RedirectToAction("List", "Comunicazioni", new { cod = docente.K_Docente, usr = docente.Email, r = "d" });
             }
             //Controllo login Operatore dell' Amministrazione
             var operatore = await dbContext.Operatori
-            .Where(o => o.USR == viewModel.username && o.PWD == viewModel.PWD)
-            .Select(o => new { o.K_Operatore, o.USR }) // Carico solo K_Studente ed Email e Matricola
-            .FirstOrDefaultAsync();
+                .Where(o => o.USR == viewModel.username && o.PWD == viewModel.PWD)
+                .Select(o => new { o.K_Operatore, o.USR }) // Carico solo K_Studente ed Email e Matricola
+                .FirstOrDefaultAsync();
 
             if (operatore != null)
             {
-                return Redirect("https://localhost:7098/Home/Index?cod=" + operatore.K_Operatore.ToString() + "&&usr=" + operatore.USR + "&&r=a");
+                return RedirectToAction("List", "Comunicazioni", new { cod = operatore.K_Operatore, usr = operatore.USR, r = "a" });
             }
 
             // Nessun utente trovato
             ModelState.AddModelError("", "Credenziali non valide.");
-            return RedirectToAction("Privacy", "Home");
+            return View(viewModel);
         }
     }
 }

@@ -67,20 +67,10 @@
 				<div class="d-flex justify-content-end  mb-2 mt-1">
 					<!-- Pulsanti in alto a destra -->
 					<div class="d-flex gap-2 me-3">
-						@* @if (@ViewData["matricola"] != null)
-						{
-
-							<a class="btn btn-sm text-white" style="background-color: #12304F;" href="@($"http://localhost:54399/Homepage.aspx?cod={ViewData["studente_id"]}&usr={ViewData["email"]}&mat={ViewData["matricola"]}&a={ViewData["abilitato"]}")">Area Lavoro</a>
-
-
-						}
-						else
-						{
-							<a class="btn btn-sm text-white disabled" tabindex="-1" aria-disabled="true" style="background-color: #12304F;" href="@($"http://localhost:54399/Homepage.aspx?cod={ViewData["studente_id"]}&usr={ViewData["email"]}&mat={ViewData["matricola"]}&a={ViewData["abilitato"]}")">Area Lavoro</a>
-						} *@
+					
 					</div>
 					<div class="d-flex gap-2 me-3">
-						<a class="btn  btn-sm " style="color: #12304F; border-color:#12304F;" aria-current="page" href="https://localhost:7272/Home/Index">Logout</a>
+						<a class="btn  btn-sm " style="color: #12304F; border-color:#12304F;" aria-current="page" asp-controller="Comunicazioni" asp-action="Logout">Logout</a>
 					</div>
 
 				</div>

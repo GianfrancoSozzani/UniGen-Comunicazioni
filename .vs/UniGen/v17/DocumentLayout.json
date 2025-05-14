@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\Pc\\Desktop\\UniGenComunicazioni\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2635816B-49A9-4089-BE7F-3AB1DF8C3E59}|Comunicazioni\\Comunicazioni.csproj|c:\\users\\pc\\desktop\\unigencomunicazioni\\comunicazioni\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2635816B-49A9-4089-BE7F-3AB1DF8C3E59}|Comunicazioni\\Comunicazioni.csproj|solutionrelative:comunicazioni\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2635816B-49A9-4089-BE7F-3AB1DF8C3E59}|Comunicazioni\\Comunicazioni.csproj|c:\\users\\pc\\desktop\\unigencomunicazioni\\comunicazioni\\models\\entities\\comunicazione.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2635816B-49A9-4089-BE7F-3AB1DF8C3E59}|Comunicazioni\\Comunicazioni.csproj|solutionrelative:comunicazioni\\models\\entities\\comunicazione.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2635816B-49A9-4089-BE7F-3AB1DF8C3E59}|Comunicazioni\\Comunicazioni.csproj|c:\\users\\pc\\desktop\\unigencomunicazioni\\comunicazioni\\views\\login\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2635816B-49A9-4089-BE7F-3AB1DF8C3E59}|Comunicazioni\\Comunicazioni.csproj|solutionrelative:comunicazioni\\views\\login\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2635816B-49A9-4089-BE7F-3AB1DF8C3E59}|Comunicazioni\\Comunicazioni.csproj|c:\\users\\pc\\desktop\\unigencomunicazioni\\comunicazioni\\controllers\\comunicazionicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2635816B-49A9-4089-BE7F-3AB1DF8C3E59}|Comunicazioni\\Comunicazioni.csproj|solutionrelative:comunicazioni\\controllers\\comunicazionicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2635816B-49A9-4089-BE7F-3AB1DF8C3E59}|Comunicazioni\\Comunicazioni.csproj|c:\\users\\pc\\desktop\\unigencomunicazioni\\comunicazioni\\comunicazioni.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{2635816B-49A9-4089-BE7F-3AB1DF8C3E59}|Comunicazioni\\Comunicazioni.csproj|solutionrelative:comunicazioni\\comunicazioni.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,41 +34,41 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "LoginController.cs",
-              "DocumentMoniker": "C:\\Users\\Pc\\Desktop\\UniGenComunicazioni\\Comunicazioni\\Controllers\\LoginController.cs",
-              "RelativeDocumentMoniker": "Comunicazioni\\Controllers\\LoginController.cs",
-              "ToolTip": "C:\\Users\\Pc\\Desktop\\UniGenComunicazioni\\Comunicazioni\\Controllers\\LoginController.cs",
-              "RelativeToolTip": "Comunicazioni\\Controllers\\LoginController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-14T15:32:18.13Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Comunicazione.cs",
-              "DocumentMoniker": "C:\\Users\\Pc\\Desktop\\UniGenComunicazioni\\Comunicazioni\\Models\\Entities\\Comunicazione.cs",
-              "RelativeDocumentMoniker": "Comunicazioni\\Models\\Entities\\Comunicazione.cs",
-              "ToolTip": "C:\\Users\\Pc\\Desktop\\UniGenComunicazioni\\Comunicazioni\\Models\\Entities\\Comunicazione.cs",
-              "RelativeToolTip": "Comunicazioni\\Models\\Entities\\Comunicazione.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-14T15:31:52.977Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "ComunicazioniController.cs",
               "DocumentMoniker": "C:\\Users\\Pc\\Desktop\\UniGenComunicazioni\\Comunicazioni\\Controllers\\ComunicazioniController.cs",
               "RelativeDocumentMoniker": "Comunicazioni\\Controllers\\ComunicazioniController.cs",
               "ToolTip": "C:\\Users\\Pc\\Desktop\\UniGenComunicazioni\\Comunicazioni\\Controllers\\ComunicazioniController.cs",
               "RelativeToolTip": "Comunicazioni\\Controllers\\ComunicazioniController.cs",
-              "ViewState": "AgIAAGUBAAAAAAAAAIA9wHgBAAAwAAAAAAAAAA==",
+              "ViewState": "AgIAAHQAAAAAAAAAAAAIwI0AAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-13T15:03:25.49Z",
+              "WhenOpened": "2025-05-14T16:11:01.136Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "C:\\Users\\Pc\\Desktop\\UniGenComunicazioni\\Comunicazioni\\Views\\Login\\Login.cshtml",
+              "RelativeDocumentMoniker": "Comunicazioni\\Views\\Login\\Login.cshtml",
+              "ToolTip": "C:\\Users\\Pc\\Desktop\\UniGenComunicazioni\\Comunicazioni\\Views\\Login\\Login.cshtml",
+              "RelativeToolTip": "Comunicazioni\\Views\\Login\\Login.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-14T15:38:29.762Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Comunicazioni",
+              "DocumentMoniker": "C:\\Users\\Pc\\Desktop\\UniGenComunicazioni\\Comunicazioni\\Comunicazioni.csproj",
+              "RelativeDocumentMoniker": "Comunicazioni\\Comunicazioni.csproj",
+              "ToolTip": "C:\\Users\\Pc\\Desktop\\UniGenComunicazioni\\Comunicazioni\\Comunicazioni.csproj",
+              "RelativeToolTip": "Comunicazioni\\Comunicazioni.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-05-14T15:37:16.709Z",
               "EditorCaption": ""
             }
           ]

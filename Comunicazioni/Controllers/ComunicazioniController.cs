@@ -333,7 +333,7 @@ hai ricevuto una comunicazione dall'Amministrazione.
 
         //----------------------------------------------//
 
-        //metodo per il return conservando i dati proveneirnti da altri progetti via url
+        //metodo per il return dopo un add o add riposta per conservare i dati proveneirnti da altri progetti via url
 
         private IActionResult RedirectToList()
         {
@@ -353,6 +353,13 @@ hai ricevuto una comunicazione dall'Amministrazione.
             }
         }
 
+        //svuotamento seessione facendo logout
+        [HttpGet]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear(); // Svuota tutta la sessione
+            return RedirectToAction("Login", "Login"); // Torna alla pagina Login
+        }
 
         [HttpGet] //visualizzo i dati
         public IActionResult Add()

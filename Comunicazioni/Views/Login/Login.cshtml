@@ -28,3 +28,10 @@
     </div>
 </div>
 
+@if (ViewData.ModelState[""]?.Errors.Any() == true)
+{
+    <script>
+        alert('@Html.Raw(System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode(ViewData.ModelState[""].Errors[0].ErrorMessage))');
+    </script>
+}
+
