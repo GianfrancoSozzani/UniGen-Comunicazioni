@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "l06tV+1HyUw=",
+  "dgSpecHash": "VifnotpVO9c=",
   "success": false,
   "projectFilePath": "C:\\Users\\Pc\\Desktop\\UniGenComunicazioni\\Comunicazioni\\Comunicazioni.csproj",
   "expectedPackageFiles": [
@@ -89,6 +89,8 @@
       "code": "NU1104",
       "level": "Error",
       "message": "Unable to find project 'C:\\Users\\Pc\\Desktop\\UniGenComunicazioni\\LibreriaClassi\\LibreriaClassi.csproj'. Check that the project reference is valid and that the project file exists.",
+      "projectPath": "C:\\Users\\Pc\\Desktop\\UniGenComunicazioni\\Comunicazioni\\Comunicazioni.csproj",
+      "filePath": "C:\\Users\\Pc\\Desktop\\UniGenComunicazioni\\Comunicazioni\\Comunicazioni.csproj",
       "libraryId": "C:\\Users\\Pc\\Desktop\\UniGenComunicazioni\\LibreriaClassi\\LibreriaClassi.csproj",
       "targetGraphs": [
         "net8.0"

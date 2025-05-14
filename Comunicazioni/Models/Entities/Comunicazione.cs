@@ -22,7 +22,6 @@ namespace Comunicazioni.Models.Entities
         [ValidateNever]
         public Docente? Docente{ get; set; }
 
-
         // Proprietà per il mittente (non mappate al DB come relazioni)
         [NotMapped]
         public Studente? MittenteStudente { get; set; }
