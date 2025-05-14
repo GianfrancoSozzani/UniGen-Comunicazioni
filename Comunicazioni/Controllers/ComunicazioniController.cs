@@ -4,7 +4,6 @@ using System.Net.Mail;
 using Comunicazioni.Data;
 using Comunicazioni.Models;
 using Comunicazioni.Models.Entities;
-using LibreriaClassi;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -142,7 +141,7 @@ namespace Comunicazioni.Controllers
                 }
             }
         }
-        //----------------------------------------------//
+        //LIST//
         [HttpGet]
         public async Task<IActionResult> List(string r, string cod, string? mat, string? a, string? usr)
         {
@@ -383,7 +382,6 @@ hai ricevuto una comunicazione dall'Amministrazione.
             {
                 comunicazione.Soggetto = "A";
                 //aggiunta necessaria: di default Guid? = 00000000-0000-0000-0000-0000-0000-0000, quindi non risultava null,
-                // e il meccanismo di list si inceppava
 
                 if (comunicazione.K_Studente != null)
                 {
@@ -430,9 +428,6 @@ hai ricevuto una comunicazione dall'Amministrazione.
         public async Task<IActionResult> AddRisposta(Comunicazione viewModel)
         {
             string ruolo = HttpContext.Session.GetString("r");
-            Guid chiaveUtente;
-
-            chiaveUtente = Guid.Parse(HttpContext.Session.GetString("cod"));
 
             var ultimaComunicazione = dbContext.Comunicazioni
                 .Where(c => c.Codice_Comunicazione == viewModel.Codice_Comunicazione)
@@ -449,7 +444,7 @@ hai ricevuto una comunicazione dall'Amministrazione.
                 Codice_Comunicazione = viewModel.Codice_Comunicazione,
                 DataOraComunicazione = DateTime.Now,
                 Testo = viewModel.Testo.Trim(),
-                K_Soggetto = chiaveUtente,
+                K_Soggetto = Guid.Parse(HttpContext.Session.GetString("cod"))
             };
 
 
