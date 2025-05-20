@@ -18,7 +18,7 @@ This project contains the Internal Messaging module developed as part of a large
 - Integration with the main application user roles  
 
 ## My Role  
-- Co-developed the module as part of a team of three : Gianfranco Sozzani(me), Rosa Maffei, Leonardo Annunziata 
+- Co-developed the module as part of a team of three : Gianfranco Sozzani (me), Rosa Maffei, Leonardo Annunziata 
 - Designed and implemented message routing and database interactions  
 - Created responsive views and ensured smooth user experience  
 
