@@ -26,7 +26,8 @@ This project contains the Internal Messaging module developed as part of a large
 1. Clone the repository  
 2. Open the project in Visual Studio  
 3. Configure the connection string in `appsettings.json`  
-4. Build and run the module  
+4. Build and run the module
+5. Use this credentials: USER: paolotesta@studentiunigen.it PWD: HealthTrack
 
 ## Contact  
 This module was developed collaboratively by the team.
